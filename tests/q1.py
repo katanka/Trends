@@ -15,33 +15,28 @@ test = {
   'suites': [
     [
       {
-        'locked': True,
         'test': """
         >>> t = make_tweet('just ate lunch', datetime(2014, 9, 29, 13), 122, 37)
         >>> tweet_text(t)
-        b087e917903af5de2907da21d8a6e66b
-        # locked
+        'just ate lunch'
         # choice: datetime(2014, 9, 29, 13, 0)
         # choice: 'just ate lunch'
         # choice: 122
         # choice: '"just ate lunch" @ (122, 37)'
         >>> tweet_time(t)
-        de00f35e58ac443ac754ff476b6dc95a
-        # locked
+        datetime(2014, 9, 29, 13, 0)
         # choice: datetime(2014, 9, 29, 13, 0)
         # choice: 'just ate lunch'
         # choice: 122
         # choice: '"just ate lunch" @ (122, 37)'
         >>> latitude(tweet_location(t))
-        d2d351dd10109bcfaf1d4dbcdc9cecc2
-        # locked
+        122
         # choice: datetime(2014, 9, 29, 13, 0)
         # choice: 'just ate lunch'
         # choice: 122
         # choice: '"just ate lunch" @ (122, 37)'
         >>> tweet_string(t)
-        972f6fa56abb0c903cf9e15e7f2bddb6
-        # locked
+        '"just ate lunch" @ (122, 37)'
         # choice: datetime(2014, 9, 29, 13, 0)
         # choice: 'just ate lunch'
         # choice: 122
