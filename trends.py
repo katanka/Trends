@@ -4,7 +4,7 @@ from data import word_sentiments, load_tweets
 from datetime import datetime
 from geo import us_states, geo_distance, make_position, longitude, latitude
 from maps import draw_state, draw_name, draw_dot, wait
-from string import ascii_letters
+from string import ascii_letters, punctuation
 from ucb import main, trace, interact, log_current_line
 
 
@@ -47,7 +47,7 @@ def tweet_time(tweet):
 
 def tweet_location(tweet):
     """Return a position representing a tweet's location."""
-    return tweet[2:]
+    return make_position(tweet[2], tweet[3])
 
 
 # tweet data abstraction (B), represented as a function
@@ -65,7 +65,12 @@ def make_tweet_fn(text, time, lat, lon):
     122
     """
     # Please don't call make_tweet in your solution
-    "*** YOUR CODE HERE ***"
+    return lambda x:{
+        'text': text,
+        'time': time,
+        'lat': lat,
+        'lon': lon
+    }.get(x)
 
 def tweet_text_fn(tweet):
     """Return a string, the words in the text of a functional tweet."""
@@ -106,7 +111,15 @@ def extract_words(text):
     ['cat', 'on', 'my', 'keyboard']
     """
     "*** YOUR CODE HERE ***"
-    return text.split()  # You may change/remove this line
+
+    for p in punctuation:
+        text = text.replace(p," ")
+
+    lst = [n for n in text if n in ascii_letters or n is ' ']
+
+    new_text = ''.join(lst)
+    
+    return new_text.split()  # You may change/remove this line
 
 def make_sentiment(value):
     """Return a sentiment, which represents a value that may not exist.
